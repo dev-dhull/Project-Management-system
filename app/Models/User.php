@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     public function projects(){ 
-        return $this->belongsTo(Project::class);
+        return $this->hasMany(Project::class);
     }
 
     /**

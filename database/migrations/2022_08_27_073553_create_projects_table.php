@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('project_name');
             $table->text('project_desc');
             $table->string('payment_type');
             $table->string('total_amount')->default('0');
             $table->string('monthly_amount')->default('0');
-            $table->datetime('invoice_from')->default('0');
-            $table->datetime('invoice_to')->default('0');
-            $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamp('invoice_from')->nullable();
+            $table->timestamp('invoice_to')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
