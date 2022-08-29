@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'client_id',
+        'user_id',
         'project_name',
         'project_desc',
         'payment_type',
@@ -19,10 +19,10 @@ class Project extends Model
         'invoice_to' 
     ];
 
-    public function client(){
-        return $this->hasMany(User::class,'id','client_id');
+    public function user(){
+        return $this->belongsTo(User::class);
     }
-    public function transaction(){
-        return $this->belongsTo(Transaction::class);
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
     }
 }

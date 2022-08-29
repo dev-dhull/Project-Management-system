@@ -31,6 +31,7 @@ class TransactionResource extends Resource
                     ->required()
                     ->options(Project::all()->pluck('project_name','id')->toArray()),
                 Forms\Components\TextInput::make('amount_paid')
+                    ->numeric()
                     ->required()
                     ->maxLength(255),
             ]);

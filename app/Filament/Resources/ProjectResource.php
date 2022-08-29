@@ -33,7 +33,7 @@ class ProjectResource extends Resource
             ->schema([
                 Card::make()
                    ->schema([
-                Forms\Components\Select::make('client_id')
+                Forms\Components\Select::make('user_id')
                     ->label('Client Name')
                     ->options(User::all()->pluck('name','id')->toArray()),
                 Forms\Components\TextInput::make('project_name')
@@ -75,7 +75,7 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                           ->sortable()
                           ->searchable(), 
-                Tables\Columns\TextColumn::make('client.name')
+                Tables\Columns\TextColumn::make('user.name')
                           ->label('Client Name')
                           ->sortable()
                           ->searchable(),
@@ -87,9 +87,9 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('total_amount'),
                 Tables\Columns\TextColumn::make('monthly_amount'),
                 Tables\Columns\TextColumn::make('invoice_from')
-                    ->date(),
+                           ->date(),
                 Tables\Columns\TextColumn::make('invoice_to')
-                    ->date()
+                           ->date()
             ])
             ->filters([
                 //
@@ -107,7 +107,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TransactionsRelationManager::class,
         ];
     }
     

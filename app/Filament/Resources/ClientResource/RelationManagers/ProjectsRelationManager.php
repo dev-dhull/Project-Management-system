@@ -9,8 +9,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Closure;
 use Filament\Forms\Components\Select;
-use App\Models\User;
 
 
 class ProjectsRelationManager extends RelationManager
@@ -23,9 +23,6 @@ class ProjectsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('client_id')
-                    ->label('Client Name')
-                    ->options(User::all()->pluck('name','id')->toArray()),
                 Forms\Components\TextInput::make('project_name')
                     ->required()
                     ->maxLength(255),
@@ -37,21 +34,22 @@ class ProjectsRelationManager extends RelationManager
                         'one_time' => 'One Time',
                         'recurring' => 'Recurring',
                     ])
+                    ->reactive()
                     ->required(),
                 Forms\Components\TextInput::make('total_amount')
-                     ->visible(fn ($get) => $get('payment_type') === 'one_time')
-                     ->numeric()
+                    ->visible(fn ($get) => $get('payment_type') === 'one_time')
+                    ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('monthly_amount')
-                     ->visible(fn ($get) => $get('payment_type') === 'recurring')
-                     ->numeric()
+                    ->visible(fn ($get) => $get('payment_type') === 'recurring')
+                    ->numeric()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('invoice_from')
                     ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
                 Forms\Components\DatePicker::make('invoice_to')
-                    ->visible(fn ($get) => $get('payment_type') === 'recurring')
+                ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
             ]);
     }
@@ -61,23 +59,24 @@ class ProjectsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                          ->sortable()
-                          ->searchable(), 
-                Tables\Columns\TextColumn::make('client.name')->label('Client Name')
-                          ->sortable()
-                          ->searchable(),
+                            ->sortable()
+                            ->searchable(), 
+                Tables\Columns\TextColumn::make('user.name')
+                            ->label('Client Name')
+                            ->sortable()
+                            ->searchable(),
                 Tables\Columns\TextColumn::make('project_name')
-                          ->sortable()
-                          ->searchable(),
+                            ->sortable()
+                            ->searchable(),
                 Tables\Columns\TextColumn::make('project_desc'),
                 Tables\Columns\TextColumn::make('payment_type'),
                 Tables\Columns\TextColumn::make('total_amount'),
                 Tables\Columns\TextColumn::make('monthly_amount'),
                 Tables\Columns\TextColumn::make('invoice_from')
-                    ->date(),
+                            ->date(),
                 Tables\Columns\TextColumn::make('invoice_to')
-                    ->date()
-            ])
+                            ->date()
+                        ])
             ->filters([
                 //
             ])
@@ -85,6 +84,7 @@ class ProjectsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
