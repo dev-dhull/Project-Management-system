@@ -28,6 +28,7 @@ class TransactionResource extends Resource
             ->schema([
                 Forms\Components\Select::make('project_id')
                     ->label('Project Name')
+                    ->required()
                     ->options(Project::all()->pluck('project_name','id')->toArray()),
                 Forms\Components\TextInput::make('amount_paid')
                     ->required()
@@ -39,8 +40,10 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('id')
+                ->sortable(),
                 Tables\Columns\TextColumn::make('project.project_name')
+                ->searchable()
                 ->label('Project Name'),
                 Tables\Columns\TextColumn::make('amount_paid'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -52,6 +55,7 @@ class TransactionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
