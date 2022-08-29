@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('project_name');
             $table->text('project_desc');
             $table->string('payment_type');
-            $table->string('total_amount');
-            $table->string('monthly_amount');
-            $table->datetime('invoice_from');
-            $table->datetime('invoice_to');
+            $table->string('total_amount')->default('0');
+            $table->string('monthly_amount')->default('0');
+            $table->datetime('invoice_from')->default('0');
+            $table->datetime('invoice_to')->default('0');
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

@@ -47,15 +47,22 @@ class ProjectResource extends Resource
                         'one_time' => 'One Time',
                         'recurring' => 'Recurring',
                     ])
+                    ->reactive()
                     ->required(),
                 Forms\Components\TextInput::make('total_amount')
+                    ->visible(fn ($get) => $get('payment_type') === 'one_time')
+                    ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('monthly_amount')
+                    ->visible(fn ($get) => $get('payment_type') === 'recurring')
+                    ->numeric()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('invoice_from')
+                    ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
                 Forms\Components\DatePicker::make('invoice_to')
+                ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
                 ])
             ]);
@@ -65,9 +72,16 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'), 
-                Tables\Columns\TextColumn::make('client.name')->label('Client Name'),
-                Tables\Columns\TextColumn::make('project_name'),
+                Tables\Columns\TextColumn::make('id')
+                          ->sortable()
+                          ->searchable(), 
+                Tables\Columns\TextColumn::make('client.name')
+                          ->label('Client Name')
+                          ->sortable()
+                          ->searchable(),
+                Tables\Columns\TextColumn::make('project_name')
+                           ->sortable()
+                           ->searchable(),
                 Tables\Columns\TextColumn::make('project_desc'),
                 Tables\Columns\TextColumn::make('payment_type'),
                 Tables\Columns\TextColumn::make('total_amount'),
@@ -81,6 +95,7 @@ class ProjectResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
             ])
