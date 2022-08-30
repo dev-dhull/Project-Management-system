@@ -82,7 +82,6 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('project_name')
                            ->sortable()
                            ->searchable(),
-                Tables\Columns\TextColumn::make('project_desc'),
                 Tables\Columns\TextColumn::make('payment_type'),
                 Tables\Columns\TextColumn::make('total_amount'),
                 Tables\Columns\TextColumn::make('monthly_amount'),

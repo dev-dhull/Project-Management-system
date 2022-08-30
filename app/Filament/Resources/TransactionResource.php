@@ -14,6 +14,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Card;
+ 
+
 
 
 class TransactionResource extends Resource
@@ -26,6 +29,8 @@ class TransactionResource extends Resource
     {
         return $form
             ->schema([
+                Card::make()
+                ->schema([
                 Forms\Components\Select::make('project_id')
                     ->label('Project Name')
                     ->required()
@@ -34,6 +39,7 @@ class TransactionResource extends Resource
                     ->numeric()
                     ->required()
                     ->maxLength(255),
+             ])
             ]);
     }
 
@@ -42,10 +48,10 @@ class TransactionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->sortable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('project.project_name')
-                ->searchable()
-                ->label('Project Name'),
+                    ->searchable()
+                    ->label('Project Name'),
                 Tables\Columns\TextColumn::make('amount_paid'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),

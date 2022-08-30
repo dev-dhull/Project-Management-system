@@ -9,6 +9,10 @@ use Filament\Resources\Pages\EditRecord;
 class EditClient extends EditRecord
 {
     protected static string $resource = ClientResource::class;
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 
     protected function getActions(): array
     {
