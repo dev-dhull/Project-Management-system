@@ -85,8 +85,8 @@ class ProjectResource extends Resource
                            ->searchable(),
                 Tables\Columns\TextColumn::make('payment_type'),
                 Tables\Columns\TextColumn::make('total_amount'),
-                Tables\Columns\TextColumn::make('transactions.amount_paid')
-                           ->label('Due Amount'),
+                Tables\Columns\TextColumn::make('Pending Amount')
+                           ->getStateUsing(fn ($record) => $record->total_amount - $record->transactions->sum('amount_paid')),
                 Tables\Columns\TextColumn::make('monthly_amount'),
                 Tables\Columns\TextColumn::make('invoice_from')
                            ->date(),
