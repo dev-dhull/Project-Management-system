@@ -12,7 +12,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+ 
 return [
 
     /*
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home_url' => '/',
+    'home_url' => '/admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -206,7 +206,7 @@ return [
             'alignment' => 'right',
         ],
         'sidebar' => [
-            'is_collapsible_on_desktop' => false,
+            'is_collapsible_on_desktop' => true,
             'groups' => [
                 'are_collapsible' => true,
             ],
