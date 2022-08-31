@@ -7,6 +7,7 @@ use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
 use Filament\Forms;
 use App\Models\User;
+use App\Models\Transaction;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -62,7 +63,7 @@ class ProjectResource extends Resource
                     ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
                 Forms\Components\DatePicker::make('invoice_to')
-                ->visible(fn ($get) => $get('payment_type') === 'recurring')
+                    ->visible(fn ($get) => $get('payment_type') === 'recurring')
                     ->required(),
                 ])
             ]);
@@ -80,10 +81,12 @@ class ProjectResource extends Resource
                           ->sortable()
                           ->searchable(),
                 Tables\Columns\TextColumn::make('project_name')
-                           ->sortable()
+                           ->sortable() 
                            ->searchable(),
                 Tables\Columns\TextColumn::make('payment_type'),
                 Tables\Columns\TextColumn::make('total_amount'),
+                Tables\Columns\TextColumn::make('transactions.amount_paid')
+                           ->label('Due Amount'),
                 Tables\Columns\TextColumn::make('monthly_amount'),
                 Tables\Columns\TextColumn::make('invoice_from')
                            ->date(),
