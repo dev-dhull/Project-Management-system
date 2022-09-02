@@ -48,8 +48,8 @@ class ProjectResource extends Resource
                         'one_time' => 'One Time',
                         'recurring' => 'Recurring',
                     ])
-                    ->reactive()
-                    ->required(),
+                    ->reactive()   
+                    ->required(),    
                 Forms\Components\TextInput::make('total_amount')
                     ->visible(fn ($get) => $get('payment_type') === 'one_time')
                     ->numeric()
