@@ -4,7 +4,7 @@ namespace App\Filament\Resources\TransactionResource\Pages;
 
 use App\Filament\Resources\TransactionResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ListRecords; 
 
 class ListTransactions extends ListRecords
 {
@@ -12,7 +12,7 @@ class ListTransactions extends ListRecords
 
     protected function getActions(): array
     {
-        return [
+        return [ 
             Actions\CreateAction::make(),
         ];
     }
