@@ -6,7 +6,7 @@ use App\Filament\Resources\TransactionResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateTransaction extends CreateRecord
+class CreateTransaction extends CreateRecord 
 {
     protected static string $resource = TransactionResource::class;
     protected function getRedirectUrl(): string
