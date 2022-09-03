@@ -22,7 +22,7 @@ return [
     |
     | The default is `admin` but you can change it to whatever works best and
     | doesn't conflict with the routing in your application.
-    |
+    | 
     */
 
     'path' => env('FILAMENT_PATH', 'admin'),
