@@ -81,9 +81,11 @@ class ProjectResource extends Resource
                           ->sortable()
                           ->searchable(),
                 Tables\Columns\TextColumn::make('project_name')
-                           ->sortable() 
+                           ->sortable()
                            ->searchable(),
-                Tables\Columns\TextColumn::make('payment_type'),
+                Tables\Columns\TextColumn::make('payment_type')
+                           ->sortable()
+                           ->searchable(),
                 Tables\Columns\TextColumn::make('total_amount'),
                 Tables\Columns\TextColumn::make('Pending Amount')
                            ->getStateUsing(fn ($record) => $record->total_amount - $record->transactions->sum('amount_paid')),
