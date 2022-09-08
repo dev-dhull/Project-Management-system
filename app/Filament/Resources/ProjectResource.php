@@ -18,7 +18,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Card;
 use Closure;
 use Filament\Forms\Components\Hidden;
-
+use Filament\Forms\Components\RichEditor;
 
 
 class ProjectResource extends Resource
@@ -40,7 +40,7 @@ class ProjectResource extends Resource
                 Forms\Components\TextInput::make('project_name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('project_desc')
+                Forms\Components\RichEditor::make('project_desc')
                     ->required()
                     ->maxLength(65535),
                 Forms\Components\Select::make('payment_type')
