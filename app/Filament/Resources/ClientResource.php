@@ -58,7 +58,7 @@ class ClientResource extends Resource
                 Tables\Columns\TextColumn::make('country')->sortable()->searchable(),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
